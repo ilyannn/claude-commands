@@ -1,7 +1,7 @@
 ---
 description: Review the latest GitHub Actions runs, surface results, and analyze issues.
 argument-hint: [workflow=<file|id>|all]
-allowed-tools: Edit, mcp__github__list_workflows, mcp__github__list_workflow_runs, mcp__github__get_workflow_run, mcp__github__list_workflow_jobs, mcp__github__get_job_logs, mcp__github__get_workflow_run_usage, mcp__github__list_workflow_run_artifacts, Bash(git rev-parse --is-inside-work-tree:*), Bash(git remote get-url:*), Bash(git config --get remote.origin.url:*)
+allowed-tools: Edit, Bash, Grep, Read
 ---
 
 # Goal
@@ -22,25 +22,25 @@ Pull the most recent GitHub Actions workflow runs for a repo, summarize their st
      - Verify repo: !`git rev-parse --is-inside-work-tree`
      - Remote URL: !`git remote get-url origin || git config --get remote.origin.url`
      - Parse `owner` and `repo` from `https://github.com/owner/repo(.git)?` or `git@github.com:owner/repo(.git)?`.
-   - Find out and remember the current commit SHA.
+   - Find out and remember the current commit SHA using `git rev-parse HEAD`.
 
 2. **Select workflows**
-   - If `workflow` not provided or set to `all`, call `mcp__github__list_workflows` to enumerate available workflows.
+   - If `workflow` not provided or set to `all`, use `gh workflow list` to enumerate available workflows.
    - When calling `/ci` next time, remember what those workflows are; no need to repeat unless explicitly prompted.
    - Otherwise, constrain to the specified workflow file name or numeric ID.
 
 3. **Fetch latest runs**
-   - For each selected workflow, call `mcp__github__list_workflow_runs` with filters:
-     - `branch` if provided
-     - `perPage = min(count, 20)` (default 3)
-   - For each run returned, check if it referes to the current commit SHA.
-   - For each that does and that is completed, use these to get more info:
-     - `mcp__github__get_workflow_run` (to capture status, conclusion, timings, HTML URL)
+   - For each selected workflow, use `gh run list --workflow=<workflow> --limit=<count> --json databaseId,headSha,status,conclusion,event,createdAt,updatedAt,url,name` with filters:
+     - `--branch=<branch>` if provided
+     - `--limit=<count>` (default 3, max 20)
+   - For each run returned, check if it refers to the current commit SHA.
+   - For each that does and that is completed, use `gh run view <run-id> --json status,conclusion,createdAt,updatedAt,url,event,jobs` to get more info:
+     - Capture status, conclusion, timings, HTML URL, job details
    - If for a given workflow the run for the current commit has not yet completed, remember that but also examine the most recent completed run.
 
 4. **Deep-dive on failures**
    - For any run that has completed but with `conclusion` not `success`:
-     - Call `mcp__github__get_job_logs` with `failed_only=true`, `return_content=true`, and `tail=tail` (default 200).
+     - Use `gh run view <run-id> --log-failed` to get logs for failed jobs.
      - Extract dominant error patterns (stack traces, test failures, exit codes, missing secrets, flaky steps, infra timeouts).
      - Map failing jobs to workflow graph where possible; note common failing steps across runs.
 
@@ -61,15 +61,15 @@ Pull the most recent GitHub Actions workflow runs for a repo, summarize their st
 
 # Execution details
 
-- Prefer _read-only_ MCP operations; do **not** cancel or rerun jobs in this command.
+- Prefer _read-only_ operations; do **not** cancel or rerun jobs in this command.
 - Be resilient to:
   - Missing workflows (empty list)
   - Private repos or insufficient PAT scopes (report and stop gracefully)
-  - Very large logs (respect the `tail` limit)
-- If the GitHub MCP server is not connected or `actions` toolset unavailable, briefly inform the user and suggest enabling it, then stop.
+  - Very large logs (use appropriate filtering)
+- If `gh` CLI is not authenticated or configured, inform the user to run `gh auth login` first.
 
 # Now do it
 
-1. Gather data using the MCP tools listed above.
+1. Gather data using the `gh` CLI commands listed above.
 2. Analyze failures and suggest possible steps to mitigate.
 3. Present the report to the user in the nice visual format.
