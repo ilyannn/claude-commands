@@ -74,7 +74,6 @@ Or with hinting about a specific topic:
   - 🔧 `chore`: Tooling, configuration
   - 🚀 `ci`: CI/CD improvements
   - 🗑️ `revert`: Reverting changes
-  - 🧪 `test`: Add a failing test
   - 🚨 `fix`: Fix compiler/linter warnings
   - 🔒️ `fix`: Fix security issues
   - 👥 `chore`: Add or update contributors
