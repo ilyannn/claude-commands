@@ -1,7 +1,7 @@
 ---
 description: Check whether the commits are ready to be pushed 
 argument-hint: 
-allowed-tools: Bash[git log, git diff, git show, git status, git branch, git remote, just pre-commit, git push], Read, Grep 
+allowed-tools: Bash, Read, Grep 
 ---
 
 # Goal
@@ -15,7 +15,9 @@ None
 # Plan
 
 1) **Get changes in the commits**
+  - Use `git log @{upstream}..HEAD` to check for unpushed commits
   - If there are no unpushed commits, inform the user showing the current branch and remote branch that was compared, then STOP here
+  - Get the full diff with `git diff @{upstream}..HEAD` to review all changes
 
 2) **Review the changes**
   - Look for any things that provide information about my system, e.g. the string `/Users/in` 
@@ -30,7 +32,8 @@ None
   - If any issues are found STOP and ask the user whether they should be fixed.
 
 5) **Do the push**
-  - If you have found no issues in 2) and 4) then run the `git push`.
+  - If you have found no issues in 2) and 4) then run `git push`
+  - If the push requires setting upstream, use `git push -u origin <branch-name>`
      
 # Execution details
 
@@ -38,6 +41,6 @@ None
 
 # Now do it
 
-1. Gather data about the commits.
-2. Analyze them and run `just pre-commit` 
-3. If no issues, push. 
+1. Gather data about the unpushed commits using `git log @{upstream}..HEAD`
+2. Analyze the changes with `git diff @{upstream}..HEAD` and run `just pre-commit`
+3. If no issues found, execute `git push` 
