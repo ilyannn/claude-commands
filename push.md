@@ -1,7 +1,7 @@
 ---
-description: Check whether the commits are ready to be pushed 
-argument-hint: 
-allowed-tools: Bash, Read, Grep 
+description: Check whether the commits are ready to be pushed
+argument-hint:
+allowed-tools: Bash, Read, Grep
 ---
 
 # Goal
@@ -14,33 +14,37 @@ None
 
 # Plan
 
-1) **Get changes in the commits**
-  - Use `git log @{upstream}..HEAD` to check for unpushed commits
-  - If there are no unpushed commits, inform the user showing the current branch and remote branch that was compared, then STOP here
-  - Get the full diff with `git diff @{upstream}..HEAD` to review all changes
+1. **Get changes in the commits**
 
-2) **Review the changes**
-  - Look for any things that provide information about my system, e.g. the string `/Users/in` 
-  - Check that no passwords, secret strings or similar are included in the code, except if clearly intended to be public
-  - Check the text files for any descriptions that should not be public, e.g. implementation plans for other repos
+- Use `git log @{upstream}..HEAD` to check for unpushed commits
+- If there are no unpushed commits, inform the user showing the current branch and remote branch that was compared, then STOP here
+- Get the full diff with `git diff @{upstream}..HEAD` to review all changes
 
-3) **Present your review**
-  - If something that should not be published is found, display the information to the user and STOP here  
+2. **Review the changes**
 
-4) **Run last-minute checks**
-  - Do a quick `just pre-commit` check
-  - If any issues are found STOP and ask the user whether they should be fixed.
+- Look for any things that provide information about my system, e.g. the string `/Users/` referencing the home folder.
+- Check that no passwords, secret strings or similar are included in the code, except if clearly intended to be public.
+- Check the text files for any descriptions that should not be public, e.g. implementation plans for other repos.
+- Do a `git hook run pre-push || true` pre-check
 
-5) **Do the push**
-  - If you have found no issues in 2) and 4) then run `git push`
-  - If the push requires setting upstream, use `git push -u origin <branch-name>`
-     
+3. **Present your review**
+
+- If something that should not be published is found, display the information to the user and STOP here.
+- If any pre-push hook issues are found STOP and ask the user whether they should be fixed.
+
+4. **Do the push**
+
+- If you have found no issues in 2) and 4) then run `git push`
+- If the push requires setting upstream, use `git push -u origin <branch-name>`
+- If the issues that prohibit push exist but the user directs you to push without fixing them, push with `--no-verify`
+
 # Execution details
 
-  - If there is a long list of issues, present the concise summary.
+- If there is a long list of issues, present the concise summary.
 
 # Now do it
 
 1. Gather data about the unpushed commits using `git log @{upstream}..HEAD`
 2. Analyze the changes with `git diff @{upstream}..HEAD` and run `just pre-commit`
-3. If no issues found, execute `git push` 
+3. If no issues found, execute `git push`
+4. If issues found then ONLY if the user explicitly agrees execute `git push --no-verify`
