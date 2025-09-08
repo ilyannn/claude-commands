@@ -8,29 +8,30 @@ allowed-tools: Bash, Read, Grep
 
 Review the commits that are not published to the remote. Check for any information that might leak when pushing.
 
-# Inputs
+# Context
 
-None
+- !`git log @{upstream}..HEAD`
+- !`git hook run pre-push || true`
 
 # Plan
 
 1. **Get changes in the commits**
 
-- Use `git log @{upstream}..HEAD` to check for unpushed commits
 - If there are no unpushed commits, inform the user showing the current branch and remote branch that was compared, then STOP here
-- Get the full diff with `git diff @{upstream}..HEAD` to review all changes
+- Examine the commits provided as part of the context.
+- Try to get the full diff with `git diff @{upstream}..HEAD` to review all changes, unless you expect it to be too large.
 
 2. **Review the changes**
 
+- Check the output of the pre-commit hook, if any.
 - Look for any things that provide information about my system, e.g. the string `/Users/` referencing the home folder.
 - Check that no passwords, secret strings or similar are included in the code, except if clearly intended to be public.
 - Check the text files for any descriptions that should not be public, e.g. implementation plans for other repos.
-- Do a `git hook run pre-push || true` pre-check
 
 3. **Present your review**
 
 - If something that should not be published is found, display the information to the user and STOP here.
-- If any pre-push hook issues are found STOP and ask the user whether they should be fixed.
+- If any pre-push hook issues that would prevent a push are found STOP and ask the user whether they should be fixed.
 
 4. **Do the push**
 
