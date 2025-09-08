@@ -1,7 +1,6 @@
 ---
 description: Review the pre-commit issues and create the commit
 argument-hint: [topic]
-model: claude-opus-4-1
 allowed-tools: Bash(git:*)
 ---
 
