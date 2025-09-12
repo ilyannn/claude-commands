@@ -10,7 +10,7 @@ Review the commits that are not published to the remote. Check for any informati
 
 # Context
 
-- !`git log @{upstream}..HEAD`
+- !`git log @{upstream}..HEAD || true`
 - !`git hook run pre-push || true`
 
 # Plan

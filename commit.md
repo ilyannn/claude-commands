@@ -25,9 +25,9 @@ Or with hinting about a specific topic:
 ## Context
 
 - Current git status: !`git status`
-- Current git diff (staged and unstaged changes): !`git diff HEAD`
+- Current git diff (staged and unstaged changes): !`git diff HEAD || true`
 - Current branch: !`git branch --show-current`
-- Latest commits: !`git log --oneline -20`
+- Latest commits: !`git log --oneline -20 || true`
 - Pre-commit hook results from git: !`git hook run pre-commit || true`
 - User-provided topic (can be empty): $ARGUMENTS
 
