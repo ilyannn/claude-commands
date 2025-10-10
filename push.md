@@ -37,6 +37,7 @@ Review the commits that are not published to the remote. Check for any informati
 
 - If you have found no issues in 2) and 4) then run `git push`
 - If the push requires setting upstream, use `git push -u origin <branch-name>`
+- if there is not a remote configured, ask the user if they want to create a new private GitHub repo with `gh` and then push to it. Only create it as public if the user explicitly requests it.
 - If the issues that prohibit push exist but the user directs you to push without fixing them, push with `--no-verify`
 
 # Execution details

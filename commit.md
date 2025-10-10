@@ -24,7 +24,7 @@ Or with hinting about a specific topic:
 
 ## Context
 
-- Current git status: !`git status`
+- Current git status: !`git status --short || true`
 - Current git diff (staged and unstaged changes): !`git diff HEAD || true`
 - Current branch: !`git branch --show-current || true`
 - Latest commits: !`git log --oneline -20 || true`
@@ -35,6 +35,7 @@ Or with hinting about a specific topic:
 
 **Note:** This is a custom command. When being executed, Claude will see a "/commit is running" message indicating the command is being processed and your thinking should proceed as below.
 
+0. If this is not a git repository, initiate one with `git init` and use `main` branch as default.
 1. Check which files are staged from `git status` output; if none are staged, automatically add all modified and new files with `git add`.
 2. Performs a `git diff` to understand what changes are being committed
 3. Analyzes the diff to determine if multiple distinct logical changes are present
@@ -172,6 +173,7 @@ Example of splitting commits:
 
 ## Important Notes
 
+‼️ If no git repository exists, the command will initialize one with `main` as the default branch.
 ‼️ If specific files are already staged, the command will only commit those files.
 ‼️ If no files are staged, it will automatically stage all modified and new files.
 ‼️ The commit message will be constructed based on the changes detected, but using user-provided hints
