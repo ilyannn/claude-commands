@@ -14,8 +14,8 @@
 - `just lint` — check formatting only.
 - Manual verify in Claude Code:
   - Add marketplace: `/plugin marketplace add ./`
-  - Install: `/plugin install commands@dev-workflow-tools`
-  - Confirm with `/help`, then try `/ci`, `/commit`, `/push` in a git repo.
+  - Install: `/plugin install flow@dev-flow-tools`
+  - Confirm with `/help`, then try `/flow:ci`, `/flow:commit`, `/flow:push` in a git repo.
 
 ## Coding Style & Naming Conventions
 
@@ -42,7 +42,7 @@
 ## Security & Configuration Tips
 
 - Never commit tokens, secrets, or personal paths. Do not widen `.claude/settings.local.json` permissions.
-- The `/ci` workflow relies on `gh` locally; document prerequisites but do not embed credentials.
+- The `/flow:ci` workflow relies on `gh` locally; document prerequisites but do not embed credentials.
 
 ## Agent-Specific Instructions
 

@@ -26,7 +26,7 @@ Pull the most recent GitHub Actions workflow runs for a repo, summarize their st
 
 2. **Select workflows**
    - If `workflow` not provided or set to `all`, use `gh workflow list` to enumerate available workflows.
-   - When calling `/ci` next time, remember what those workflows are; no need to repeat unless explicitly prompted.
+   - When calling `/flow:ci` next time, remember what those workflows are; no need to repeat unless explicitly prompted.
    - Otherwise, constrain to the specified workflow file name or numeric ID.
 
 3. **Fetch latest runs**

@@ -1,8 +1,8 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "dev-workflow-tools",
+  "name": "dev-flow-tools",
   "metadata": {
-    "description": "Plugin bundle for Claude Code developer workflow automation",
+    "description": "Plugin bundle for Claude Code Flow developer workflow automation",
     "version": "1.0.0"
   },
   "owner": {
@@ -10,14 +10,14 @@
   },
   "plugins": [
     {
-      "name": "commands",
-      "description": "CI triage, commit authoring, and push safety command workflows for Claude Code.",
+      "name": "flow",
+      "description": "Flow commands for CI triage, commit authoring, and push safety workflows in Claude Code.",
       "version": "1.0.0",
       "author": {
         "name": "ilyannn"
       },
       "source": "./",
-      "keywords": ["claude-code", "workflow", "git", "ci"]
+      "keywords": ["claude-code", "workflow", "git", "ci", "flow"]
     }
   ]
 }

@@ -24,5 +24,5 @@ pre-commit: lint
 install:
     @echo "Inside Claude Code, run:"
     @echo "  /plugin marketplace add ./"
-    @echo "  /plugin install commands@dev-workflow-tools"
+    @echo "  /plugin install flow@dev-flow-tools"
     @echo "Then restart Claude Code and run /help to confirm."

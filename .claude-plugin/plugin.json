@@ -1,10 +1,10 @@
 {
   "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
-  "name": "commands",
+  "name": "flow",
   "version": "1.0.0",
-  "description": "Slash commands for CI analysis, commit authoring, and push safety workflows in Claude Code.",
+  "description": "Namespaced Flow commands for CI analysis, commit authoring, and push safety workflows in Claude Code.",
   "author": {
     "name": "ilyannn"
   },
-  "keywords": ["claude-code", "workflow", "git", "ci"]
+  "keywords": ["claude-code", "workflow", "git", "ci", "flow"]
 }

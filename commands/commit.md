@@ -4,7 +4,7 @@ argument-hint: [topic]
 allowed-tools: Bash(git:*)
 ---
 
-# Claude Command: Commit
+# Claude Command: Flow Commit
 
 This command helps you create well-formatted commits with conventional commit messages and emoji.
 
@@ -13,13 +13,13 @@ This command helps you create well-formatted commits with conventional commit me
 To review the pre-commit issues and create a commit, just type:
 
 ```
-/commit
+/flow:commit
 ```
 
 Or with hinting about a specific topic:
 
 ```
-/commit VoiceSelector refactor
+/flow:commit VoiceSelector refactor
 ```
 
 ## Context
@@ -33,7 +33,7 @@ Or with hinting about a specific topic:
 
 ## What This Command Does
 
-**Note:** This is a custom command. When being executed, Claude will see a "/commit is running" message indicating the command is being processed and your thinking should proceed as below.
+**Note:** This is a custom command. When being executed, Claude will see a "/flow:commit is running" message indicating the command is being processed and your thinking should proceed as below.
 
 0. If this is not a git repository, initiate one with `git init` and use `main` branch as default.
 1. Check which files are staged from `git status` output; if none are staged, automatically add all modified and new files with `git add`.
