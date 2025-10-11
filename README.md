@@ -1,12 +1,12 @@
 # Flow (Claude Code Plugin)
 
-Namespaced Flow commands for CI triage, conventional commits, and safe pushes in Claude Code.
+Namespaced Flow commands for conventional commits, safe pushes, and CI triage in Claude Code.
 
 ## Commands
 
-- `/flow:ci` — Inspect GitHub Actions runs and analyze failures (`/flow:ci [workflow=<file|id>|all]`).
 - `/flow:commit` — Create emoji conventional commits with lint checks (`/flow:commit [topic]`).
 - `/flow:push` — Review unpushed commits for risky content (`/flow:push`).
+- `/flow:ci` — Inspect GitHub Actions runs and analyze failures (`/flow:ci [workflow=<file|id>|all]`).
 
 ## Installation
 
@@ -16,7 +16,7 @@ Namespaced Flow commands for CI triage, conventional commits, and safe pushes in
 2. Install the plugin: `/plugin install flow@dev-flow-tools`
 3. Restart Claude Code and run `/help` to confirm the commands are available.
 
-Quick check: in a git repo, try `/flow:ci`, `/flow:commit`, and `/flow:push`.
+Quick check: in a git repo, try `/flow:commit`, `/flow:push`, and `/flow:ci`.
 
 ## Development
 

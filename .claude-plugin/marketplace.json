@@ -11,7 +11,7 @@
   "plugins": [
     {
       "name": "flow",
-      "description": "Flow commands for CI triage, commit authoring, and push safety workflows in Claude Code.",
+      "description": "Flow commands for commit authoring, push safety, and CI triage workflows in Claude Code.",
       "version": "1.0.0",
       "author": {
         "name": "ilyannn"

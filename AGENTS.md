@@ -15,7 +15,7 @@
 - Manual verify in Claude Code:
   - Add marketplace: `/plugin marketplace add ./`
   - Install: `/plugin install flow@dev-flow-tools`
-  - Confirm with `/help`, then try `/flow:ci`, `/flow:commit`, `/flow:push` in a git repo.
+  - Confirm with `/help`, then try `/flow:commit`, `/flow:push`, `/flow:ci` in a git repo.
 
 ## Coding Style & Naming Conventions
 
