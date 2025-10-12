@@ -10,8 +10,9 @@
 ## Build, Test, and Development Commands
 
 - No build step; this repo ships Markdown + JSON metadata.
-- `just fix` — format repo (Justfile and `*.md`) via Prettier.
-- `just lint` — check formatting only.
+- `just fix` — format the Justfile plus Markdown/JSON via Biome and Prettier.
+- `just lint` — lint JSON, Markdown, and GitHub Actions workflows (Biome, markdownlint-cli2, actionlint);
+  ensure [`actionlint`](https://github.com/rhysd/actionlint) is installed locally.
 - Manual verify in Claude Code:
   - Add marketplace: `/plugin marketplace add ./`
   - Install: `/plugin install flow@dev-flow-tools`
@@ -43,6 +44,12 @@
 
 - Never commit tokens, secrets, or personal paths. Do not widen `.claude/settings.local.json` permissions.
 - The `/flow:ci` workflow relies on `gh` locally; document prerequisites but do not embed credentials.
+
+## Tooling & Sandbox Tips
+
+- Bun may be unable to write temp files in sandboxed environments. Export `BUN_TMPDIR=$PWD/tmp`
+  (and optionally `BUN_INSTALL=$PWD/.bun`) before running `just lint` or `just fix`, then clean up the
+  temp directory afterward.
 
 ## Agent-Specific Instructions
 
