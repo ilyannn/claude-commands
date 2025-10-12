@@ -4,9 +4,9 @@ Namespaced Flow commands for conventional commits, safe pushes, and CI triage in
 
 ## Commands
 
-- `/flow:commit` — Create emoji conventional commits with lint checks (`/flow:commit [topic]`).
-- `/flow:push` — Review unpushed commits for risky content (`/flow:push`).
-- `/flow:ci` — Inspect GitHub Actions runs and analyze failures (`/flow:ci [workflow=<file|id>|all]`).
+- `/flow:commit` — Create emoji conventional commits with intelligent splitting and lint checks (`/flow:commit [topic]`).
+- `/flow:push` — Guard pushes by reviewing unpushed commits for risky content (`/flow:push`).
+- `/flow:ci` — Summarize GitHub Actions runs and analyze failures (`/flow:ci [workflow=<file|id>|all]`).
 
 ## Installation
 

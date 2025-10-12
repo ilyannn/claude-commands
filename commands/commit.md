@@ -1,5 +1,5 @@
 ---
-description: Review the pre-commit issues and create the commit
+description: Create commits with intelligent splitting and pre-commit fixes
 argument-hint: [topic]
 allowed-tools: Bash(git:*)
 ---

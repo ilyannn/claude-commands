@@ -1,5 +1,5 @@
 ---
-description: Review the latest GitHub Actions runs, surface results, and analyze issues.
+description: Summarize the latest GitHub Actions runs, surface results, and analyze issues.
 argument-hint: [workflow=<file|id>|all]
 allowed-tools: Edit, Bash, Grep, Read
 ---

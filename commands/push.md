@@ -1,5 +1,5 @@
 ---
-description: Check whether the commits are ready to be pushed
+description: Guard pushes by reviewing commits for risky or sensitive changes
 argument-hint:
 allowed-tools: Bash, Read, Grep
 ---
