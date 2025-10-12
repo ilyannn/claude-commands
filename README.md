@@ -19,3 +19,5 @@ Namespaced Flow commands for conventional commits, safe pushes, and CI triage in
 ## Development
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for project layout, tasks, and contributor notes.
+
+`/flow:ci` relies on the GitHub CLI; run `gh auth login` before use.
