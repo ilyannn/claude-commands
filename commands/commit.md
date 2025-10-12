@@ -12,13 +12,13 @@ This command helps you create well-formatted commits with conventional commit me
 
 To review the pre-commit issues and create a commit, just type:
 
-```
+```text
 /flow:commit
 ```
 
 Or with hinting about a specific topic:
 
-```
+```text
 /flow:commit VoiceSelector refactor
 ```
 
