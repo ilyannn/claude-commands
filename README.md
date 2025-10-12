@@ -11,12 +11,10 @@ Namespaced Flow commands for conventional commits, safe pushes, and CI triage in
 ## Installation
 
 1. Add the marketplace (ships in `.claude-plugin/marketplace.json`):
-   - Local path: `/plugin marketplace add ./path/to/claude-commands`
-   - GitHub repo: `/plugin marketplace add owner/claude-commands`
+   - Local path: `/plugin marketplace add ./` from this repo, or
+   - GitHub repo: `/plugin marketplace add ilyannn/claude-commands`
 2. Install the plugin: `/plugin install flow@dev-flow-tools`
-3. Restart Claude Code and run `/help` to confirm the commands are available.
-
-Quick check: in a git repo, try `/flow:commit`, `/flow:push`, and `/flow:ci`.
+3. Restart Claude Code and start typing `/flow:` to confirm the commands are available.
 
 ## Development
 

@@ -17,7 +17,7 @@ Pull the most recent GitHub Actions workflow runs for a repo, summarize their st
 # Plan
 
 1. **Resolve repository coordinates**
-   - You usually know what the current owner/repo are, owner is usually `ilyannn`, repo is usually folder name.
+   - You usually know what the current owner/repo are (often repo is the folder name).
    - If `owner/repo` is unclear, infer from local git:
      - Verify repo: !`git rev-parse --is-inside-work-tree`
      - Remote URL: !`git remote get-url origin || git config --get remote.origin.url`

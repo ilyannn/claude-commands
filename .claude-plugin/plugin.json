@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "Namespaced Flow commands for commit authoring, push safety, and CI analysis in Claude Code.",
   "author": {
-    "name": "ilyannn"
+    "name": "Ilya Nikokoshev"
   },
   "keywords": ["claude-code", "workflow", "git", "ci", "flow"]
 }

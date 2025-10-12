@@ -6,7 +6,7 @@
     "version": "1.0.0"
   },
   "owner": {
-    "name": "ilyannn"
+    "name": "Ilya Nikokoshev"
   },
   "plugins": [
     {
@@ -14,7 +14,7 @@
       "description": "Flow commands for commit authoring, push safety, and CI triage workflows in Claude Code.",
       "version": "1.0.0",
       "author": {
-        "name": "ilyannn"
+        "name": "Ilya Nikokoshev"
       },
       "source": "./",
       "keywords": ["claude-code", "workflow", "git", "ci", "flow"]
