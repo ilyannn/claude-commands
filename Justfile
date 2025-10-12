@@ -20,10 +20,11 @@ check-fmt:
     bunx --bun @biomejs/biome format
     bunx --bun prettier --check {{ PRETTIER_TARGETS }}
 
-# Lint JSON and Markdown files
+# Lint JSON, Markdown, and GitHub Actions workflows
 lint:
     bunx --bun @biomejs/biome lint
     bunx --bun markdownlint-cli2 {{ MARKDOWN_GLOBS }}
+    actionlint -color
 
 # Fix lint issues
 fix-lint:
