@@ -11,8 +11,8 @@
 
 - No build step; this repo ships Markdown + JSON metadata.
 - `just fix` — format the Justfile plus Markdown/JSON via Biome and Prettier.
-- `just lint` — lint JSON, Markdown, and GitHub Actions workflows (Biome, markdownlint-cli2, actionlint);
-  ensure [`actionlint`](https://github.com/rhysd/actionlint) is installed locally.
+- `just lint` — lint JSON and Markdown (Biome + markdownlint-cli2).
+- GitHub Actions workflows are linted separately in `.github/workflows/actionlint.yml`.
 - Manual verify in Claude Code:
   - Add marketplace: `/plugin marketplace add ./`
   - Install: `/plugin install flow@dev-flow-tools`
