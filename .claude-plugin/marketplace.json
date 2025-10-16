@@ -1,9 +1,8 @@
 {
-  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "dev-flow-tools",
   "metadata": {
     "description": "Plugin bundle for Claude Code Flow developer workflow automation",
-    "version": "1.0.0"
+    "version": "1.0.1"
   },
   "owner": {
     "name": "Ilya Nikokoshev"
@@ -12,7 +11,7 @@
     {
       "name": "flow",
       "description": "Flow commands for commit authoring, push safety, and CI triage workflows in Claude Code.",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "author": {
         "name": "Ilya Nikokoshev"
       },

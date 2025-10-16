@@ -1,7 +1,6 @@
 {
-  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
   "name": "flow",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Namespaced Flow commands for commit authoring, push safety, and CI analysis in Claude Code.",
   "author": {
     "name": "Ilya Nikokoshev"
