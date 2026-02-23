@@ -20,7 +20,8 @@ Pull the most recent GitHub Actions workflow runs for a repo, summarize their st
    - You usually know what the current owner/repo are (often repo is the folder name).
    - If `owner/repo` is unclear, infer from local git:
      - Verify repo: !`git rev-parse --is-inside-work-tree`
-     - Remote URL: !`git remote get-url origin || git config --get remote.origin.url`
+     - List remotes: !`git remote -v`
+     - If there is exactly one remote, use it. If there are multiple remotes, prefer `origin` if it exists, otherwise ask the user which remote to use. If there are no remotes, inform the user and stop.
      - Parse `owner` and `repo` from `https://github.com/owner/repo(.git)?` or `git@github.com:owner/repo(.git)?`.
    - Find out and remember the current commit SHA using `git rev-parse HEAD`.
 
