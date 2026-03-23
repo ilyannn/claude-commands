@@ -35,6 +35,11 @@ Or with hinting about a specific topic:
 
 **Note:** This is a custom command. When being executed, Claude will see a "/flow:commit is running" message indicating the command is being processed and your thinking should proceed as below.
 
+**Execution safety:** Run git operations as separate tool calls in the
+repository working directory. Do not use compound shell commands for git
+work: no `cd ... && git ...`, no chaining with `&&` or `;`, no pipes, and no
+command substitution or heredocs for commit messages.
+
 0. If this is not a git repository, initiate one with `git init` and use `main` branch as default.
 1. Check which files are staged from `git status` output; if none are staged, automatically add all modified and new files with `git add`.
 2. Performs a `git diff` to understand what changes are being committed
@@ -181,3 +186,16 @@ Example of splitting commits:
 ‼️ If suggesting multiple commits, it will help you stage and commit the changes separately.
 ‼️ Always reviews the commit diff to ensure the message matches the changes.
 ‼️ This command can commit with --no-verify but ONLY if the user explicitly agreed to it when asked.
+‼️ For multiline commit messages, prefer repeated `git commit -m` flags instead of shell-generated message blocks.
+
+## Safe Command Pattern
+
+- Use the repo as the tool working directory instead of running `cd`.
+- Run `git status`, `git add`, `git diff`, and `git commit` as separate commands.
+- For commit messages with a body, use multiple `-m` flags, for example:
+
+```text
+git commit -m "✨ feat: add review app export tools" \
+  -m "Adds editing, persistence, and export support for the review app." \
+  -m "Co-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>"
+```
