@@ -35,10 +35,11 @@ Or with hinting about a specific topic:
 
 **Note:** This is a custom command. When being executed, Claude will see a "/flow:commit is running" message indicating the command is being processed and your thinking should proceed as below.
 
-**Execution safety:** Run git operations as separate tool calls in the
-repository working directory. Do not use compound shell commands for git
-work: no `cd ... && git ...`, no chaining with `&&` or `;`, no pipes, and no
-command substitution or heredocs for commit messages.
+**Execution safety:** Run each git operation as a single, simple command.
+Never use compound shell commands: no `cd ... && git ...`, no chaining
+with `&&` or `;`, no pipes, and no command substitution or heredocs for
+commit messages. If the repo is not the current working directory, use
+`git -C <path>` instead of `cd`.
 
 0. If this is not a git repository, initiate one with `git init` and use `main` branch as default.
 1. Check which files are staged from `git status` output; if none are staged, automatically add all modified and new files with `git add`.
@@ -190,12 +191,15 @@ Example of splitting commits:
 
 ## Safe Command Pattern
 
-- Use the repo as the tool working directory instead of running `cd`.
-- Run `git status`, `git add`, `git diff`, and `git commit` as separate commands.
+- Run `git status`, `git add`, `git diff`, and `git commit` as separate, single commands.
+- If the repo is not the current working directory, prefix every git call
+  with `-C <path>` (e.g., `git -C /path/to/repo status --short`).
+  **Never** use `cd <path> && git ...` — this creates compound commands
+  that trigger security prompts.
 - For commit messages with a body, use multiple `-m` flags, for example:
 
 ```text
-git commit -m "✨ feat: add review app export tools" \
+git -C /path/to/repo commit -m "✨ feat: add review app export tools" \
   -m "Adds editing, persistence, and export support for the review app." \
   -m "Co-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>"
 ```

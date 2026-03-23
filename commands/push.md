@@ -42,6 +42,13 @@ Review the commits that are not published to the remote. Check for any informati
 - If there is not a remote configured, ask the user if they want to create a new private GitHub repo with `gh` and then push to it. Only create it as public if the user explicitly requests it.
 - If the issues that prohibit push exist but the user directs you to push without fixing them, push with `--no-verify`
 
+# Execution safety
+
+Run each git operation as a single, simple command. Never use compound
+shell commands: no `cd ... && git ...`, no chaining with `&&` or `;`.
+If the repo is not the current working directory, use `git -C <path>`
+instead of `cd`.
+
 # Execution details
 
 - If there is a long list of issues, present the concise summary.
