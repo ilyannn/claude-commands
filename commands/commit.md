@@ -47,7 +47,7 @@ git -C /path/to/repo add file1 file2
 ```
 
 ```text
-git -C /path/to/repo commit -m "✨ feat: summary" -m "Details." -m "Co-Authored-By: ..."
+git -C /path/to/repo commit -m "✨ feat: summary" -m "Details." -m "<trailers, if any>"
 ```
 
 Wrong (compound command — triggers security prompt, NEVER do this):
@@ -65,18 +65,27 @@ cd /path && git add file1 && git commit -m "$(cat <<'EOF' ... EOF)"
 2. Performs a `git diff` to understand what changes are being committed
 3. Analyzes the diff to determine if multiple distinct logical changes are present
 4. If multiple distinct changes are detected, break the commit into multiple smaller commits
-5. For each commit (or the single commit if not split), create a commit message using emoji conventional commit format
+5. For each commit (or the single commit if not split), create a commit message in the repository's style (see below); fall back to the emoji conventional commit format
 6. Analyze the pre-commit hook output; if there are formatting issues, try to fix them with project-standard formatting tools, often `just format`.
 7. For other issues, like linting or test failures, try to fix them yourself.
 8. Run the git hook again after any changes.
 9. If there are complex issues that are hard to fix then ask the user how to proceed: fix the issues, commit with `--no-verify` or continue other work.
+
+## Match the Repository's Style First
+
+Read the latest commits in the context before writing a message.
+
+- If most recent commits follow a consistent convention that differs from the emoji format below, follow that convention instead, without emoji.
+  Examples: `[infra] Replace the static key`, `lint: check every justfile`, plain imperative sentences.
+- Use the emoji conventional format when the repository already uses it, or has no clear convention (a new repository, or a mixed history).
+- Instructions from the user or the repository (`AGENTS.md`, `CLAUDE.md`, `CONTRIBUTING.md`) override both.
 
 ## Best Practices for Commits
 
 - **Verify before committing**: Ensure code is linted, builds correctly, and documentation is updated
 - **Atomic commits**: Each commit should contain related changes that serve a single purpose
 - **Split large changes**: If changes touch multiple concerns, split them into separate commits
-- **Conventional commit format**: Use the format `<type>: <description>` where type is one of:
+- **Conventional commit format** (the default when the repository has no convention of its own): Use the format `<type>: <description>` where type is one of:
   - `feat`: A new feature
   - `fix`: A bug fix
   - `docs`: Documentation changes
