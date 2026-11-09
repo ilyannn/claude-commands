@@ -11,16 +11,18 @@ Review the commits that are not published to the remote. Check for any informati
 # Context
 
 - List remotes: !`git remote -v`
-- !`git log @{upstream}..HEAD || true`
-- !`git hook run pre-push || true`
+- Current branch and its upstream: !`git status --short --branch`
+- Commits on the current branch that are on no remote branch yet: !`git log --ignore-missing HEAD --not --remotes`
+- Pre-push hook results from git: !`git hook run --ignore-missing pre-push || true`
 
 # Plan
 
 1. **Get changes in the commits**
 
-- If there are no unpushed commits, inform the user showing the current branch and remote branch that was compared, then STOP here
+- If there are no unpushed commits, inform the user showing the current branch and that it was compared with every remote branch, then STOP here
 - Examine the commits provided as part of the context.
-- Try to get the full diff with `git diff @{upstream}..HEAD` to review all changes, unless you expect it to be too large.
+- Get every commit's changes with `git log -p --ignore-missing HEAD --not --remotes` to review them all, unless you expect it to be too large.
+  Review each commit, not only the end result: a secret added in one commit and removed in a later one is still pushed.
 
 2. **Review the changes**
 
@@ -38,6 +40,7 @@ Review the commits that are not published to the remote. Check for any informati
 
 - If you have found no issues in 2) and 4) then run `git push`
 - If the push requires setting upstream, use `git push -u <remote-name> <branch-name>`
+- If you work in a worktree of your own whose commits belong on another branch (the user's or the repository's instructions say which), push with `git push <remote-name> HEAD:<branch-name>` instead
 - If there are multiple remotes and it is unclear which one the user intends to push to, ask the user before pushing.
 - If there is not a remote configured, ask the user if they want to create a new private GitHub repo with `gh` and then push to it. Only create it as public if the user explicitly requests it.
 - If the issues that prohibit push exist but the user directs you to push without fixing them, push with `--no-verify`
@@ -49,13 +52,18 @@ shell commands: no `cd ... && git ...`, no chaining with `&&` or `;`.
 If the repo is not the current working directory, use `git -C <path>`
 instead of `cd`.
 
+Don't use the `@{...}` revision syntax, such as `@{upstream}` or `@{u}`.
+In a background session that works in a worktree, Claude Code refuses
+git commands such as `git log @{upstream}..HEAD`. Name the remote branch
+instead, as in `origin/main`.
+
 # Execution details
 
 - If there is a long list of issues, present the concise summary.
 
 # Now do it
 
-1. Gather data about the unpushed commits using `git log @{upstream}..HEAD`
-2. Analyze the changes with `git diff @{upstream}..HEAD` and run `just pre-commit`
+1. Gather data about the unpushed commits from the context (`git log --ignore-missing HEAD --not --remotes`)
+2. Analyze the changes with `git log -p --ignore-missing HEAD --not --remotes` and run `just pre-commit`
 3. If no issues found, execute `git push`
 4. If issues found then ONLY if the user explicitly agrees execute `git push --no-verify`
